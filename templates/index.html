@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>ToDo List</title>
+		<link rel="stylesheet" href="/static/style.css" />
+	</head>
+	<body>
+		<h1>ToDo List</h1>
+		<form action="/add" method="post">
+			<input type="text" name="name" placeholder="Новая задача" required />
+			<label> <input type="checkbox" name="important" /> Важная </label>
+			<button type="submit">Добавить</button>
+		</form>
+
+		<ul>
+			{% for task in tasks %}
+			<li>
+				{% if task.important %}
+				<strong style="color: red">[Важная]</strong>
+				{% endif %} {{ task.name }} - {% if task.done %} ✅ {% else %} ⏳ {%
+				endif %}
+
+				<!-- Кнопка переключения done -->
+				<form method="post" action="/toggle/{{ task.id }}">
+					<button type="submit">
+						{% if task.done %}⏳ Не выполнено{% else %} ✅ Выполнено {% endif %}
+					</button>
+				</form>
+
+				<!-- Кнопка переключения важности -->
+				<form
+					action="/toggle-important/{{ task.id }}"
+					method="post"
+					style="display: inline"
+				>
+					<button type="submit">
+						{% if task.important %}Снять важность{% else %}Сделать важной{%
+						endif %}
+					</button>
+				</form>
+				<form method="post" action="/delete/{{ task.id }}">
+					<button type="submit">Удалить</button>
+				</form>
+			</li>
+			{% endfor %}
+		</ul>
+	</body>
+</html>
