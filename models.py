@@ -2,7 +2,7 @@ from sqlmodel import SQLModel, Field, create_engine, Session,select
 
 class Task(SQLModel, table = True): 
 	id: int | None = Field(default = None, primary_key = True)
-	name: str
+	name: str  = Field(..., min_length=1, max_length=255)
 	done: bool = False
 	important: bool = False
 

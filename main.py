@@ -22,6 +22,9 @@ def index(request: Request):
 
 @app.post("/add")
 def add_task(name: str = Form(...), important: bool = Form(False)): 
+	if not (1 <= len(name) <= 255):
+		return HTMLResponse("Ошибка: имя задачи должно содержать от 1 до 255 символов", status_code=400)
+	
 	with get_session() as session: 
 		task = Task(name=name, important=important)
 		session.add(task)
