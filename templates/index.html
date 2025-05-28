@@ -8,6 +8,34 @@
 	<body>
 		<div class="container">
 			<h1>Задачник</h1>
+			<div class="sort-controls">
+				<div class="sort-group">
+					<span>Сортировка по дате:</span>
+					<a
+						href="/?sort_by_date=asc"
+						class="btn {% if current_sort_date == 'asc' %}active{% endif %}"
+						>↑ По возрастанию</a
+					>
+					<a
+						href="/?sort_by_date=desc"
+						class="btn {% if current_sort_date == 'desc' %}active{% endif %}"
+						>↓ По убыванию</a
+					>
+				</div>
+				<div class="sort-group">
+					<span>Сортировка по важности:</span>
+					<a
+						href="/?sort_by_importance=asc"
+						class="btn {% if current_sort_importance == 'asc' %}active{% endif %}"
+						>↑ Сначала обычные</a
+					>
+					<a
+						href="/?sort_by_importance=desc"
+						class="btn {% if current_sort_importance == 'desc' %}active{% endif %}"
+						>↓ Сначала важные</a
+					>
+				</div>
+			</div>
 			<form class="add-task" action="/add" method="post">
 				<input
 					class="main-input"
@@ -31,6 +59,11 @@
 						<strong style="color: red">[Важно]</strong>
 						{% endif %} {{ task.name }} - {% if task.done %} ✅ {% else %} ⏳ {%
 						endif %}
+						<span class="task-date">
+							{{
+							task.created_at.replace(tzinfo=timezone.utc).astimezone().strftime('%d.%m.%Y
+							%H:%M') }}
+						</span>
 					</div>
 
 					<div class="content-btn">

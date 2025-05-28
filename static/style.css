@@ -111,3 +111,38 @@ h1 {
 	align-items: center;
 	gap: 20px;
 }
+
+.task-date {
+	font-size: 14px;
+	color: #aaa;
+	margin-left: 10px;
+}
+
+/* Стили для блока сортировки */
+.sort-controls {
+	margin-bottom: 20px;
+	padding: 15px;
+	border-radius: 10px;
+}
+
+.sort-group {
+	margin-bottom: 20px;
+}
+
+.sort-group span {
+	display: inline-block;
+	margin-right: 10px;
+	color: #aaa;
+}
+
+.sort-group a.btn {
+	margin-right: 5px;
+	padding: 5px 10px;
+	font-size: 14px;
+	text-decoration: none;
+}
+
+.sort-group a.btn.active {
+	background-color: #4caf50;
+	color: white;
+}
